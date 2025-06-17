@@ -1,27 +1,107 @@
-# PHP Developer Sınama Uygulaması
-    - Uygulamanızda konum ekleme, konum listeleme, konumları düzenleme, konumları harita üstünde gösterilmesi ile rota çizgilerinin oluşması uç noktaları olacaktır.
-    - Konum Ekleme Uç noktası: Gönderilen bilgiler içinde konumun enlem ve boylam bilgileri, konumun adı ve hexadecimal şekilde marker rengini veritabanına ekleyebilmelidir.
-    - Konumları Listeleme Uç Noktası: Kaydedilmiş konumları listeleyen uç noktadır. Listede konumun adı, kullanıcının seçtiği renk ve konum bilgileri olacaktır.
-    - Konum Detayı Uç Noktası: Kaydedilmiş konumu tek olarak gösteren uç noktadır.
-    - Konum Düzenleme Sayfası: Kaydedilmiş konumların düzenlendiği uç noktadır.
-    - Rotalama Uç Noktası: Konumlar gönderilen konuma göre en yakın noktadan başlayarak rotalanacaktır. (Kuş bakışı olarak uzaklık ölçülebilir. Bina ve yollar yoksayılabilir.)
+# Location Manager API
 
-# Kullanılması Gereken Teknolojiler ve Olması Gerekenler
-    - Laravel
-    - MySQL veya MongoDB
-    - Validation Katmanı olmalıdır.
-    - Katmanlı mimari oluşturulmalıdır.
-    - ORM kullanılmalıdır.
-    - Rate Limit mekanizması koyulmalıdır.
-    - Proje Dockerize olmalıdır.
+A RESTful API for managing locations and calculating routes between them.
 
-# Uyulması Gereken Kurallar
-    - Uygulamayı oluştururken yalın kod yazmaya özen gösterin.
-    - Repository bağlantısını ilk günden paylaşın. Aksi takdirde değerlendirilmenize olumsuz puan olarak yansır.
-    - Önerilen yöntemleri kullanmaya özen gösterin.
+## Features
 
-# Artı Puan Kazandıracak Nitelikler
-    - Uygulama içi testlerin yazılması,
-    - Uygulamanın deploy edilmesi.
-    - Deploy için pipeline kurulması.
-    - Deploy süreçlerinin otomatize edilmesi.
+- Location Management:
+  - Create new locations with latitude, longitude, name, and marker color
+  - List all locations
+  - Get detailed information about a specific location
+  - Update location information
+
+- Routing:
+  - Calculate routes based on proximity
+  - Distance calculation between locations
+  - Sorted locations by distance from a reference point
+
+## Requirements
+
+- PHP 8.1 or higher
+- MySQL 8.0 or higher
+- Composer
+- Node.js and npm
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Muhammed-Ali-01/location-manager.git
+```
+
+2. Install PHP dependencies:
+```bash
+composer install
+```
+
+3. Install Node.js dependencies:
+```bash
+npm install
+```
+
+4. Copy .env.example to .env and configure your environment:
+```bash
+cp .env.example .env
+```
+
+5. Generate application key:
+```bash
+php artisan key:generate
+```
+
+6. Run database migrations:
+```bash
+php artisan migrate
+```
+
+7. Start the development server:
+```bash
+php artisan serve
+```
+
+## API Documentation
+
+### Endpoints
+
+#### Locations
+
+- **GET /api/locations**
+  - List all locations
+
+- **POST /api/locations**
+  - Create a new location
+  - Request Body:
+    ```json
+    {
+        "name": "string",
+        "latitude": "float",
+        "longitude": "float",
+        "color": "string" (hex color)
+    }
+    ```
+
+- **GET /api/locations/{id}**
+  - Get detailed information about a specific location
+
+- **PUT /api/locations/{id}**
+  - Update a location
+  - Request Body same as POST endpoint
+
+#### Routing
+
+- **GET /api/route/{location}**
+  - Get locations sorted by distance from the reference location
+  - Returns locations with calculated distances
+
+## Rate Limiting
+
+- 10 requests per minute for all API endpoints
+- Exceeding the limit will result in a 429 Too Many Requests response
+
+## Testing
+
+Run tests using:
+```bash
+php artisan test
+```
+
