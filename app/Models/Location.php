@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\DistanceHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +19,16 @@ class Location extends Model
     ];
 
     protected $casts = [
-        'latitude' => 'float',
+        'latitude'  => 'float',
         'longitude' => 'float',
     ];
+
+
+
+
+
+    public function calculateDistance(Location $location): float
+    {
+        return DistanceHelper::calculate($this->latitude, $this->longitude, $location->latitude, $location->longitude);
+    }
 }
