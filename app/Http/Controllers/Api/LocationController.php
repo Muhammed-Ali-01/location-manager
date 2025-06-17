@@ -11,6 +11,26 @@ use Illuminate\Http\JsonResponse;
 
 class LocationController extends Controller
 {
+
+
+    public function index(): JsonResponse
+    {
+        $locations = Location::all();
+        return response()->json([
+            'success' => true,
+            'data'    => LocationResource::collection($locations),
+        ]);
+    }
+
+
+    public function show(Location $location): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'data'    => new LocationResource($location),
+        ]);
+    }
+
     public function store(LocationStoreRequest $request): JsonResponse
     {
         $location = Location::create($request->validated());
