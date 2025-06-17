@@ -30,6 +30,15 @@ class LocationController extends Controller
         ]);
     }
 
+    public function destroy(Location $location): JsonResponse
+    {
+        $location->delete();
+        return response()->json([
+            'success' => true,
+            'message' => __('Location deleted successfully'),
+        ]);
+    }
+
 
 
 }
