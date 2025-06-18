@@ -7,8 +7,11 @@ RUN apt-get install -y \
     zip \
     unzip \
     libpng-dev \
-    libcurl4-gnutls-dev 
+    libcurl4-gnutls-dev \
+    nodejs \
+    npm
 
+# Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql exif pcntl bcmath gd curl    
 
 WORKDIR /var/www
@@ -23,6 +26,12 @@ RUN echo '#!/bin/bash\n \
     \
     echo "composer install"\n \
     composer install --no-progress --no-interaction\n\
+    \
+    echo "npm install"\n \
+    npm install\n\
+    \
+    echo "npm run build"\n \
+    npm run build\n\
     \
     echo "creating database"\n \
     mysql -h database -u root -p ${DB_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${DB_DATABASE};"\n\
@@ -40,6 +49,3 @@ RUN echo '#!/bin/bash\n \
     php artisan serve --host=0.0.0.0 --port=8000' > /start.sh \
     && chmod +x /start.sh
 CMD ["/start.sh"]
-
-
-
