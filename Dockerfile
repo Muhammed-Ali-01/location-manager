@@ -11,25 +11,21 @@ RUN apt-get install -y \
 
 RUN docker-php-ext-install pdo pdo_mysql exif pcntl bcmath gd curl    
 
-RUN pecl install redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
-
-
 WORKDIR /var/www
 
 COPY . .    
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN composer install --no-progress --no-interaction
-RUN cp .env.example .env
-
 # Create startup script
 RUN echo '#!/bin/bash\n \
-    sleep 15\n\
+    echo "copying .env file"\n \
+    cp .env.example .env\n\
+    \
+    echo "composer install"\n \
+    composer install --no-progress --no-interaction\n\
     \
     echo "creating database"\n \
-    mysql -h database -u root -p L05yvFmq2bgv0AJh -e "CREATE DATABASE IF NOT EXISTS location_manager;"\n\
+    mysql -h database -u root -p ${DB_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${DB_DATABASE};"\n\
     \
     echo "running php artisan key:generate"\n\
     php artisan key:generate\n\
