@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
+
 
 class LocationStoreRequest extends FormRequest
 {
@@ -27,5 +30,14 @@ class LocationStoreRequest extends FormRequest
             'latitude'  => 'required|numeric|between:-90,90',
             'color'     => 'required|string|hex_color',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => $validator->errors()
+        ], 422));
     }
 }

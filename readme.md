@@ -36,7 +36,7 @@ git clone https://github.com/Muhammed-Ali-01/location-manager.git
 cd  location-manager
 ```
 
-3. Checkout to the developer branch:
+3. You can checkout to the developer branch:
 ```bash
 git checkout developer
 ```
