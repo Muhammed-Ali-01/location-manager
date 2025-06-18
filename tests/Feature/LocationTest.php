@@ -82,6 +82,7 @@ test('can delete a location', function () {
     $this->assertDatabaseMissing('locations',['id'=>$location->id] );
 });
 
+
 test('fails with validation errors when creating location with invalid data', function () {
     $payload = [
         'name'      => '', // Empty name
@@ -90,17 +91,18 @@ test('fails with validation errors when creating location with invalid data', fu
         'color'     => 'invalid-color', // Invalid color
     ];
     
-    $response = $this->post('/api/locations', $payload);
-    $response->assertStatus(422);
-    $response->assertJsonStructure([
-        'data' => [
-            'name',
-            'longitude',
-            'latitude',
-            'color',
-        ]
-    ]);
-
+    $response = $this->post('/api/locations', $payload)
+        ->assertStatus(422)
+        ->assertJson([
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => [
+                'name' => ['The name field is required.'],
+                'longitude' => ['The longitude field must be between -180 and 180.'],
+                'latitude' => ['The latitude field must be between -90 and 90.'],
+                'color' => ['The color field must be a valid hexadecimal color.'],
+            ]
+        ]);
 });
 
 test('fails with validation errors when updating location with invalid data', function () {
@@ -158,4 +160,3 @@ test('respects rate limiting', function () {
         }
     }
 });
-

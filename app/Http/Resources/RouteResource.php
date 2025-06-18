@@ -17,7 +17,8 @@ class RouteResource extends JsonResource
         return [
             'id'       => $this->id,
             'name'     => $this->name,
-            'distance' => number_format($this->distance, 2) . ' km',
+            'distance' => $this->distance,
+            //'distance' => number_format($this->distance, 2) . ' km',
         ];
     }
 }
