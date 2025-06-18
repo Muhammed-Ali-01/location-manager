@@ -20,7 +20,9 @@ A RESTful API for managing locations and calculating routes between them.
 - PHP 8.1 or higher
 - MySQL 8.0 or higher
 - Composer
-- Node.js and npm
+- Docker
+- Docker Compose
+- Git
 
 ## Installation
 
@@ -29,35 +31,26 @@ A RESTful API for managing locations and calculating routes between them.
 git clone https://github.com/Muhammed-Ali-01/location-manager.git
 ```
 
-2. Install PHP dependencies:
+2. Change directory to the project folder:
 ```bash
-composer install
+cd  location-manager
 ```
 
-3. Install Node.js dependencies:
+3. Checkout to the developer branch:
 ```bash
-npm install
+git checkout developer
 ```
 
-4. Copy .env.example to .env and configure your environment:
+4. Copy the .env.example file to .env:
 ```bash
 cp .env.example .env
 ```
 
-5. Generate application key:
+5. Build and start the Docker containers:
 ```bash
-php artisan key:generate
+docker compose up --build
 ```
 
-6. Run database migrations:
-```bash
-php artisan migrate
-```
-
-7. Start the development server:
-```bash
-php artisan serve
-```
 
 ## API Documentation
 
@@ -97,11 +90,4 @@ php artisan serve
 
 - 10 requests per minute for all API endpoints
 - Exceeding the limit will result in a 429 Too Many Requests response
-
-## Testing
-
-Run tests using:
-```bash
-php artisan test
-```
 
