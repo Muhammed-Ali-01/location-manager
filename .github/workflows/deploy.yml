@@ -1,0 +1,32 @@
+name: Deploy to server
+
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - uses: actions/checkout@v2
+      - name: Copy .env
+        run: cp .env.example .env
+      - name: Install composer Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
+      - name: Deploy PHP to Server
+        if: ${{ success() }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            cd domains
+            cd location-manager.nicesoft.me/
+            git pull
+            php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            php artisan migrate --force
