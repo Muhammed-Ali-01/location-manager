@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LocationStoreRequest;
-use App\Http\Requests\LocationUpdateRequest;
+use App\Http\Requests\LocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Models\Location;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +30,7 @@ class LocationController extends Controller
         ]);
     }
 
-    public function store(LocationStoreRequest $request): JsonResponse
+    public function store(LocationRequest $request): JsonResponse
     {
         $location = Location::create($request->validated());
         return response()->json([
@@ -40,7 +39,7 @@ class LocationController extends Controller
             'data'    => new LocationResource($location),
         ]);
     }
-    public function update(LocationUpdateRequest $request, Location $location): JsonResponse
+    public function update(LocationRequest $request, Location $location): JsonResponse
     {
         $location->update($request->validated());
         return response()->json([
