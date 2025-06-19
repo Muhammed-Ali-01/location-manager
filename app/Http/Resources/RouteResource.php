@@ -15,10 +15,10 @@ class RouteResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'       => $this->id,
-            'name'     => $this->name,
+            'id' => $this->id,
+            'name' => $this->name,
             'distance' => $this->distance,
-            //'distance' => number_format($this->distance, 2) . ' km',
+            // 'distance' => number_format($this->distance, 2) . ' km',
         ];
     }
 }

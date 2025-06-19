@@ -19,13 +19,9 @@ class Location extends Model
     ];
 
     protected $casts = [
-        'latitude'  => 'float',
+        'latitude' => 'float',
         'longitude' => 'float',
     ];
-
-
-
-
 
     public function calculateDistance(Location $location): float
     {

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('color');
             $table->float('latitude');
             $table->float('longitude');
-            
+
             $table->timestamps();
         });
     }

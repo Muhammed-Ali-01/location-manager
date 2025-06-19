@@ -10,7 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class RoutingController extends Controller
 {
-
     public function index(Location $location): JsonResponse
     {
         $locations = Location::where('id', '!=', $location->id)->get();
@@ -19,10 +18,11 @@ class RoutingController extends Controller
         });
 
         $locations = $locations->sortBy('distance');
+
         return response()->json([
             'success' => true,
-            'referance_location'=> new LocationResource($location),
-            'data'    => RouteResource::collection($locations),
+            'referance_location' => new LocationResource($location),
+            'data' => RouteResource::collection($locations),
         ]);
     }
 }

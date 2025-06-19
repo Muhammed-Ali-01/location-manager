@@ -41,35 +41,35 @@ class LocationSeeder extends Seeder
 
         $locations = [
             [
-                "name"      => "İstanbul",
-                "latitude"  => 41.0082,
-                "longitude" => 28.9784,
-                "color"     => "#FF0000",
+                'name' => 'İstanbul',
+                'latitude' => 41.0082,
+                'longitude' => 28.9784,
+                'color' => '#FF0000',
 
             ],
             [
-                'name'      => 'Ankara',
-                'latitude'  => 39.9334,
+                'name' => 'Ankara',
+                'latitude' => 39.9334,
                 'longitude' => 32.8597,
-                'color'     => '#FF0000',
+                'color' => '#FF0000',
             ],
             [
-                'name'      => 'Kocaeli',
-                'latitude'  => 40.8533,
+                'name' => 'Kocaeli',
+                'latitude' => 40.8533,
                 'longitude' => 29.8815,
-                'color'     => '#00FF00',
+                'color' => '#00FF00',
             ],
             [
-                'name'      => 'Adana',
-                'latitude'  => 37.0000,
+                'name' => 'Adana',
+                'latitude' => 37.0000,
                 'longitude' => 35.3213,
-                'color'     => '#0000FF',
+                'color' => '#0000FF',
             ],
             [
-                'name'      => 'Hakkari',
-                'latitude'  => 37.5744,
+                'name' => 'Hakkari',
+                'latitude' => 37.5744,
                 'longitude' => 43.7408,
-                'color'     => '#FFFF00',
+                'color' => '#FFFF00',
             ],
         ];
 

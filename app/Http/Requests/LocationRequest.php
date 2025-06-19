@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
-
 
 class LocationRequest extends FormRequest
 {
@@ -25,10 +24,10 @@ class LocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'longitude' => 'required|numeric|between:-180,180',
-            'latitude'  => 'required|numeric|between:-90,90',
-            'color'     => 'required|string|hex_color',
+            'latitude' => 'required|numeric|between:-90,90',
+            'color' => 'required|string|hex_color',
         ];
     }
 
@@ -37,7 +36,7 @@ class LocationRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'success' => false,
             'message' => 'Validation errors',
-            'data' => $validator->errors()
+            'data' => $validator->errors(),
         ], 422));
     }
 }
