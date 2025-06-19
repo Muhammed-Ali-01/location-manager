@@ -36,17 +36,12 @@ git clone https://github.com/Muhammed-Ali-01/location-manager.git
 cd  location-manager
 ```
 
-3. Checkout to the developer branch:
-```bash
-git checkout developer
-```
-
-4. Copy the .env.example file to .env:
+3. Copy the .env.example file to .env:
 ```bash
 cp .env.example .env
 ```
 
-5. Build and start the Docker containers:
+4. Build and start the Docker containers:
 ```bash
 docker compose up --build
 ```
@@ -91,3 +86,10 @@ docker compose up --build
 - 10 requests per minute for all API endpoints
 - Exceeding the limit will result in a 429 Too Many Requests response
 
+
+## Testing
+
+- You can run tests:
+```bash
+  php artisan test
+```
