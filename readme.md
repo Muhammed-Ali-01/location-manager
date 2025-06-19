@@ -15,6 +15,9 @@ A RESTful API for managing locations and calculating routes between them.
   - Distance calculation between locations
   - Sorted locations by distance from a reference point
 
+## Demo
+  demo app available on [https://location-manager.nicesoft.me/](https://location-manager.nicesoft.me/)  
+
 ## Requirements
 
 - PHP 8.1 or higher
