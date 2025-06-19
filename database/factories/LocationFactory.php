@@ -18,8 +18,8 @@ class LocationFactory extends Factory
     {
         return [
             'name'      => fake()->name,
-            'longitude' => fake()->randomFloat(-180, +180),
-            'latitude'  => fake()->randomFloat(-90, +90),
+            'longitude' => fake()->numberBetween(-180, 180),
+            'latitude'  => fake()->numberBetween(-90, 90),
             'color'     => fake()->hexColor(),
         ];
     }
